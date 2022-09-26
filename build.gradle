@@ -40,12 +40,14 @@ allprojects{
            implementation libs.springBootWeb
            implementation libs.springBootJpa
            implementation libs.springBootActuator
+            implementation libs.springValidation
            developmentOnly libs.springBootDevtools
            implementation libs.mapstruct
            annotationProcessor libs.mapstructProcessor
            annotationProcessor libs.lombokMapstructBinding
            implementation libs.lombok
            annotationProcessor libs.lombok
+
     }
 }
 
