@@ -1,0 +1,3 @@
+rootProject.name = 'Bilgeadam_Boost2_Microservices'
+include 'auth-service'
+
