@@ -18,7 +18,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping(LOGIN)
-    public ResponseEntity<String> doLogin(DoLoginRequestDto dto){
+    public ResponseEntity<String> doLogin(@RequestBody @Valid DoLoginRequestDto dto){
        if(authService.dologin(dto))
             return ResponseEntity.ok("Giriş Başarılı");
        return ResponseEntity.badRequest().body("Giriş Başarısız");
