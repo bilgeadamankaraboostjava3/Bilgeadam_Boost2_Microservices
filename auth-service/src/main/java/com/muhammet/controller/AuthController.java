@@ -5,10 +5,7 @@ import com.muhammet.dto.request.RegisterRequestDto;
 import com.muhammet.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -21,12 +18,15 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping(LOGIN)
-    public ResponseEntity<Void> doLogin(DoLoginRequestDto dto){
-        return null;
+    public ResponseEntity<String> doLogin(DoLoginRequestDto dto){
+       if(authService.dologin(dto))
+            return ResponseEntity.ok("Giriş Başarılı");
+       return ResponseEntity.badRequest().body("Giriş Başarısız");
     }
-    @GetMapping(REGISTER)
-    public ResponseEntity<Void> register(@Valid RegisterRequestDto dto){
-        return null;
+    @PostMapping(REGISTER)
+    public ResponseEntity<Void> register(@RequestBody @Valid RegisterRequestDto dto){
+        authService.register(dto);
+        return ResponseEntity.ok().build();
     }
 
 }
