@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class EditProfileRequestDto {
+    String token;
     String username;
     String name;
     String surname;

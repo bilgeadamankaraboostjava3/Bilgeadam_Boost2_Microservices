@@ -33,6 +33,16 @@ public class UserProfileController {
 
     @PostMapping(UPDATE_PROFILE)
     public ResponseEntity<Boolean> updateProfile(@RequestBody @Valid EditProfileRequestDto dto){
-        return ResponseEntity.ok(userProfileService.updateUserProfile(dto));
+        if(dto.getToken()==null)
+            throw new UserManagerException(ErrorType.INVALID_TOKEN);
+        try{
+            Long authid = Long.parseLong(dto.getToken().substring(3,dto.getToken().indexOf("X")));
+            return ResponseEntity.ok(userProfileService.updateUserProfile(dto,authid));
+        }catch (Exception exception){
+            throw new UserManagerException(ErrorType.INVALID_TOKEN);
+        }
+
+
+
     }
 }

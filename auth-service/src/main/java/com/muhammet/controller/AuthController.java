@@ -2,12 +2,15 @@ package com.muhammet.controller;
 
 import com.muhammet.dto.request.DoLoginRequestDto;
 import com.muhammet.dto.request.RegisterRequestDto;
+import com.muhammet.repository.entity.Auth;
 import com.muhammet.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.util.Optional;
 
 import static com.muhammet.constants.ApiUrls.*;
 
@@ -19,8 +22,11 @@ public class AuthController {
 
     @PostMapping(LOGIN)
     public ResponseEntity<String> doLogin(@RequestBody @Valid DoLoginRequestDto dto){
-       if(authService.dologin(dto))
-            return ResponseEntity.ok("Giriş Başarılı");
+        Optional<Auth> auth = authService.dologin(dto);
+       if(auth.isPresent()){
+           String token = "token: TKK"+ auth.get().getId().toString()+"X06Y4";
+           return ResponseEntity.ok(token);
+       }
        return ResponseEntity.badRequest().body("Giriş Başarısız");
     }
     @PostMapping(REGISTER)

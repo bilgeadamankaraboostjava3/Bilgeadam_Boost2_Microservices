@@ -9,6 +9,9 @@ import com.muhammet.repository.enums.Roles;
 import com.muhammet.utility.ServiceManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
 @Service
 public class AuthService extends ServiceManager<Auth,Long> {
     private final IAuthRepository authRepository;
@@ -18,8 +21,8 @@ public class AuthService extends ServiceManager<Auth,Long> {
         this.authRepository = authRepository;
         this.userManager = userManager;
     }
-    public boolean dologin(DoLoginRequestDto dto){
-        return authRepository.isExists(dto.getUsername(),
+    public Optional<Auth> dologin(DoLoginRequestDto dto){
+        return authRepository.findOptionalByUsernameIgnoreCaseAndPassword(dto.getUsername(),
                 dto.getPassword());
     }
     public Auth register(RegisterRequestDto dto){
