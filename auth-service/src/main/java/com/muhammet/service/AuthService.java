@@ -1,18 +1,22 @@
 package com.muhammet.service;
 import com.muhammet.dto.request.DoLoginRequestDto;
+import com.muhammet.dto.request.NewUserCreateDto;
 import com.muhammet.dto.request.RegisterRequestDto;
+import com.muhammet.manager.IUserManager;
 import com.muhammet.repository.IAuthRepository;
 import com.muhammet.repository.entity.Auth;
 import com.muhammet.repository.enums.Roles;
 import com.muhammet.utility.ServiceManager;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 @Service
 public class AuthService extends ServiceManager<Auth,Long> {
     private final IAuthRepository authRepository;
-
-    public AuthService(IAuthRepository authRepository) {
+    private final IUserManager userManager;
+    public AuthService(IAuthRepository authRepository, IUserManager userManager) {
         super(authRepository);
         this.authRepository = authRepository;
+        this.userManager = userManager;
     }
     public boolean dologin(DoLoginRequestDto dto){
         return authRepository.isExists(dto.getUsername(),
@@ -29,7 +33,15 @@ public class AuthService extends ServiceManager<Auth,Long> {
                     auth.setRole(dto.getRole()==null ? Roles.ADMIN : dto.getRole());
                 else
                     auth.setRole(Roles.USER);
-       return save(auth);
+        save(auth);
+        userManager.NewUserCreate(
+                NewUserCreateDto.builder()
+                        .authid(auth.getId())
+                        .email(dto.getEmail())
+                        .username(dto.getUsername())
+                        .build()
+        );
+       return auth;
     }
 
 

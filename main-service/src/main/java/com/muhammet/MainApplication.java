@@ -6,8 +6,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients
-public class AuthServiceAppliaction {
+public class MainApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AuthServiceAppliaction.class, args);
+        SpringApplication.run(MainApplication.class, args);
     }
 }

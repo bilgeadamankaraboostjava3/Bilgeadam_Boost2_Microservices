@@ -1,4 +1,5 @@
 rootProject.name = 'Bilgeadam_Boost2_Microservices'
 include 'auth-service'
 include 'user-service'
+include 'main-service'
 

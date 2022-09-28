@@ -9,11 +9,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class NewUserCreateDto {
-    /**
-     * yeni üyelik açmış birisinin auth_id bilgisinin tutulduğu alan
-     */
-    Long authid;
+public class EditProfileRequestDto {
     String username;
+    String name;
+    String surname;
     String email;
+    String phone;
+    String photo;
+    String address;
+    String about;
 }

@@ -1,4 +1,4 @@
-package org.muhammet.dto.request;
+package com.muhammet.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
