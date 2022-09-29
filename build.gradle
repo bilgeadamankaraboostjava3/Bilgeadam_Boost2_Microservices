@@ -40,7 +40,7 @@ allprojects{
            implementation libs.springBootWeb
            implementation libs.springBootJpa
            implementation libs.springBootActuator
-            implementation libs.springValidation
+           implementation libs.springValidation
            developmentOnly libs.springBootDevtools
            implementation libs.mapstruct
            annotationProcessor libs.mapstructProcessor
@@ -49,6 +49,7 @@ allprojects{
            annotationProcessor libs.lombok
            implementation libs.openApi
            implementation libs.springOpenFeign
+           implementation libs.javaJWT
 
     }
 }

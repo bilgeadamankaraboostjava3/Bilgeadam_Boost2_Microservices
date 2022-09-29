@@ -4,6 +4,7 @@ import com.muhammet.dto.request.DoLoginRequestDto;
 import com.muhammet.dto.request.RegisterRequestDto;
 import com.muhammet.repository.entity.Auth;
 import com.muhammet.service.AuthService;
+import com.muhammet.utility.JwtTokenManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +20,13 @@ import static com.muhammet.constants.ApiUrls.*;
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
+    private final JwtTokenManager jwtTokenManager;
 
     @PostMapping(LOGIN)
     public ResponseEntity<String> doLogin(@RequestBody @Valid DoLoginRequestDto dto){
         Optional<Auth> auth = authService.dologin(dto);
        if(auth.isPresent()){
-           String token = "token: TKK"+ auth.get().getId().toString()+"X06Y4";
+           String token = jwtTokenManager.createToken(auth.get().getId()).get();
            return ResponseEntity.ok(token);
        }
        return ResponseEntity.badRequest().body("Giriş Başarısız");
