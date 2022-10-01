@@ -11,6 +11,7 @@
         </processorPath>
         <module name="Bilgeadam_Boost2_Microservices.main-service.main" />
         <module name="Bilgeadam_Boost2_Microservices.user-service.main" />
+        <module name="Bilgeadam_Boost2_Microservices.api-gateway-service.main" />
         <module name="Bilgeadam_Boost2_Microservices.config-server.main" />
         <module name="Bilgeadam_Boost2_Microservices.main" />
         <module name="Bilgeadam_Boost2_Microservices.auth-service.main" />
