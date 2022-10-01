@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * Ulaşmak istediğiniz controller ın url bilgisini vermelisiniz.
  * Tüm feign işlemlerine benzersiz adlandırmalar yapılmalıdır.
  */
-@FeignClient(url = "http://localhost:9091/v1/api/user",name = "user-service-userprofile",decode404 = true)
+@FeignClient(url = "${raceapplication.url.user}v1/api/user",name = "user-service-userprofile",decode404 = true)
 public interface IUserManager {
     @PostMapping("/newcreateuser")
     ResponseEntity<Boolean> NewUserCreate(NewUserCreateDto dto);
