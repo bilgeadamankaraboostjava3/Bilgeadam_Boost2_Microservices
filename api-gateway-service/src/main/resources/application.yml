@@ -15,6 +15,13 @@ spring:
           uri: ${AUTHURL}
           predicates:
             - Path=/auth/**
+        - id: auth-service-swagger
+          uri: ${AUTHURL}
+          predicates:
+            - Path=/auth/swagger
+          filters:
+            - name: swagger-ui
+            - RewritePath=/, /swagger-ui/index.html
         - id: main-service
           uri: ${MAINURL}
           predicates:

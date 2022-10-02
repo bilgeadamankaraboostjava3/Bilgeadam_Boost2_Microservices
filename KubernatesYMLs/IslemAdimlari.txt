@@ -1,3 +1,9 @@
+***** DİKKAT *****
+MAC cihazlarda build alırken, linux versiyonunun farklı olması nedniyle
+oluşturulan image bulut sistemlerde sorun çıkartabiliyor. bu nedenle builda
+alınan linux versiyonunun özellikle belirtilmesi iş görecektir.
+docker build --platform linux/amd64 --build-arg JAR_FILE=[JAR DOSYASI] -t [DEPLOY NAME] .
+****************
 -- 1- İlk olarak PostgreSQL yml oluşturulur.
 ---- oluşan pod için  kubectl exec -it [POD NAME] -- bash
 ---- su - postgres

@@ -5,7 +5,7 @@ metadata:
   labels:
     team: tarismadevelopersteam
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: auth-service    
@@ -15,7 +15,7 @@ spec:
         app: auth-service
     spec:
       containers:        
-        - image: muhammedali55/yarismauygulamasiauth:v001
+        - image: javaboost2/authserver:v001
           name:  podauth
           resources:
             requests:
