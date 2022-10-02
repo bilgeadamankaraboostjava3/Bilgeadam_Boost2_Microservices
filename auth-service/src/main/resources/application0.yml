@@ -1,9 +1,9 @@
 spring:
   cloud:
     config:
-      uri: 'http://localhost:8888'
+      uri: ${CONFIGSERVER}
   config:
     import: "configserver:"
   application:
-    name: auth-service-application-dev
+    name: auth-service-application
 

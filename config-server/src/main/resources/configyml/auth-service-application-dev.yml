@@ -1,0 +1,19 @@
+server:
+  port: 9090
+
+spring:
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/YarismaDB'
+    username: 'postgres'
+    password: 'root'
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+raceapplication:
+  url:
+    auth: http://localhost:9090/
+    main: http://localhost:9091/
+    user: http://localhost:9092/

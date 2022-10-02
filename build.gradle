@@ -40,7 +40,7 @@ allprojects{
            implementation libs.springBootWeb
            implementation libs.springBootActuator
            implementation libs.springValidation
-           developmentOnly libs.springBootDevtools
+          // developmentOnly libs.springBootDevtools
            implementation libs.mapstruct
            annotationProcessor libs.mapstructProcessor
            annotationProcessor libs.lombokMapstructBinding
