@@ -62,3 +62,8 @@ spec:
                 secretKeyRef:
                   name: yarismasecret
                   key: user_url
+            - name: CONFIGSERVER
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: config_server_url

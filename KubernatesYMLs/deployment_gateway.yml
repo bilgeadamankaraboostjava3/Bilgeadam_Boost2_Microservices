@@ -15,7 +15,7 @@ spec:
         app: gateway-service
     spec:
       containers:        
-        - image: muhammedali55/yarismauygulamasigateway:v001
+        - image: javaboost2/apigatewayserver:v001
           name:  podgateway
           resources:
             requests:

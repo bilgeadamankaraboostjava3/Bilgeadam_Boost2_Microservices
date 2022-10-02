@@ -15,7 +15,7 @@ spec:
         app: config-service
     spec:
       containers:        
-        - image: muhammedali55/yarismauygulamasiconfig:v001
+        - image: javaboost2/configserver:v001
           name:  podconfig
           resources:
             requests:
