@@ -6,4 +6,4 @@ spring:
   config:
     import: "configserver:"
   application:
-    name: main-service-application
+    name: main-service-application-dev

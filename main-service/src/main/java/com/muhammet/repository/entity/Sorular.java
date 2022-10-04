@@ -23,6 +23,15 @@ public class Sorular {
     int sure;
     Long sahipuserid;
     int cevapadedi;
+    /**
+     * Bilgisayar
+     * BİLGİSAYAR
+     * BILGISAYAR
+     * bilgisayar
+     * Bilg.
+     * Computer
+     * PC
+     */
     String grupadi;
     @Enumerated(EnumType.STRING)
     @Builder.Default

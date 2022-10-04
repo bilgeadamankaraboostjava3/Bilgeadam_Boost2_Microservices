@@ -37,9 +37,9 @@ public class GlobalExceptionHandler {
         ErrorType errorType = ErrorType.INTERNAL_ERROR;
         return new ResponseEntity<>(createError(errorType, exception), errorType.getHttpStatus());
     }
-    @ExceptionHandler(UserManagerException.class)
+    @ExceptionHandler(MainManagerException.class)
     @ResponseBody
-    public ResponseEntity<ErrorMessage> handleMonolitikManagerException(UserManagerException ex){
+    public ResponseEntity<ErrorMessage> handleMonolitikManagerException(MainManagerException ex){
         ErrorType errorType = ex.getErrorType();
         HttpStatus httpStatus = errorType.getHttpStatus();
         /**

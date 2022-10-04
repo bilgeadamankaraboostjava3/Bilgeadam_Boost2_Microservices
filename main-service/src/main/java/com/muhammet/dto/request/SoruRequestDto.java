@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class SoruRequestDto {
+    private String token;
     private String soruicerigi;
     private int sure;
     private long olusturanid;
