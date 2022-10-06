@@ -8,6 +8,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 public class AuthServiceSecurityConfig {
+
+    @Bean
+    JwtTokenFilter getJwtTokenFilter(){
+        return new JwtTokenFilter();
+    }
+
     /**
      * Sunucunuza gelen tüm isteklerin konfigurasyonunu burada yapıyorsunuz
      *
@@ -30,7 +36,7 @@ public class AuthServiceSecurityConfig {
          * 3- pernitAll -> kimlik doğrulamasına tabi tutma.
          */
         http.authorizeRequests()
-                .antMatchers("/v3/api-docs/**","/swagger-ui/**").permitAll()
+                .antMatchers("/v3/api-docs/**","/swagger-ui/**","/v1/api/auth/dologin","/v1/api/auth/register").permitAll()
                 .anyRequest().authenticated();
         /**
          * 1- Eğer kimlik doğrulaması gerekiyor ise bunu spring in login formu üzerinden yap.
@@ -41,7 +47,7 @@ public class AuthServiceSecurityConfig {
          * burada gelen isteğin cevabı verilmeden önce filter araya sokularak
          * doğrulama mekanizması buraya işlenmelidir.
          */
-        http.addFilterBefore(new JwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(getJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         /*
         http.csrf().disable()
                 .authorizeHttpRequests((requests) -> requests

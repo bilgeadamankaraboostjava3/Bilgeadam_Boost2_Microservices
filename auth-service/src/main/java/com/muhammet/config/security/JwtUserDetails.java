@@ -23,7 +23,6 @@ public class JwtUserDetails implements UserDetailsService {
         return null;
     }
 
-
     public UserDetails loadUserByUserId(Long authId) throws UsernameNotFoundException {
         /**
          * id si verilen kullanıcının var olup olmadığına bakılmalıdır.
