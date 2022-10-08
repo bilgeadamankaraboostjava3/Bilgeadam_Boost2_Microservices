@@ -30,12 +30,14 @@ public class AuthService extends ServiceManager<Auth,Long> {
             auth = Auth.builder()
                     .password(dto.getPassword())
                     .username(dto.getUsername())
+                    .role(Roles.USER)
                     .build();
             if(dto.getRoleAdminPassword()!=null)
                 if(dto.getRoleAdminPassword().equals("123456"))
                     auth.setRole(dto.getRole()==null ? Roles.ADMIN : dto.getRole());
                 else
                     auth.setRole(Roles.USER);
+
         save(auth);
         userManager.NewUserCreate(
                 NewUserCreateDto.builder()

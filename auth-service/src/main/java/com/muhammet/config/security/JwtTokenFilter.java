@@ -31,6 +31,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
          * bu bilgi içinde Bearer ile başlayan bir token bilgisi olmalıdır.
          */
         final String authorizationHeader = request.getHeader("Authorization");
+
         /**
          * gelen string ve request içindeki oturum bilgisini kontrol ederek işleme devam ediyorum.
          */

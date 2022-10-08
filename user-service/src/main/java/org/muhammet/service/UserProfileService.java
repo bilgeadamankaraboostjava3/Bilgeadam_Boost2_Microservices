@@ -6,13 +6,21 @@ import org.muhammet.mapper.IUserProfileMapper;
 import org.muhammet.repository.IUserProfileRepository;
 import org.muhammet.repository.entity.UserProfile;
 import org.muhammet.utility.ServiceManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserProfileService extends ServiceManager<UserProfile,Long> {
     private final IUserProfileRepository repository;
+    @Autowired
+    private CacheManager cacheManager;
     public UserProfileService(IUserProfileRepository repository) {
         super(repository);
         this.repository = repository;
@@ -37,4 +45,37 @@ public class UserProfileService extends ServiceManager<UserProfile,Long> {
             return false;
         }
     }
+
+    public Page<UserProfile> findAllPage(int currentPage, int pageSize, String sortParameter, String direction){
+        Sort sort = Sort.by(Sort.Direction.fromString(direction),sortParameter);
+        Pageable pageable = PageRequest.of(currentPage,pageSize,sort);
+        return repository.findAll(pageable);
+    }
+
+    public Slice<UserProfile> findAllSlice(int currentPage, int pageSize, String sortParameter, String direction){
+        Sort sort = Sort.by(Sort.Direction.fromString(direction),sortParameter);
+        Pageable pageable = PageRequest.of(currentPage,pageSize,sort);
+        return repository.findAll(pageable);
+    }
+
+
+    public void clearCache(String key, String parameter){
+        cacheManager.getCache(key).evict(parameter);
+    }
+
+    /**
+     * [Method Adı] :: [Değer] -> id
+     * Clear ->
+     * @return
+     */
+    @Cacheable(value = "userprofile_getall")
+    public List<UserProfile> getAllCache(){
+        return repository.findAll();
+    }
+
+
+    public List<UserProfile> getById(Long id){
+        return repository.findAll();
+    }
+
 }

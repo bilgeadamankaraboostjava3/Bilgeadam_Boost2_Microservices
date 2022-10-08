@@ -29,7 +29,7 @@ public class JwtTokenManager {
                     .withAudience()
                     .withClaim("id", id)
                     .withIssuer("muhammet")
-                    .withExpiresAt(new Date(System.currentTimeMillis()+ 1000*60))
+                    .withExpiresAt(new Date(System.currentTimeMillis()+ 1000*60*15))
                     .withIssuedAt(new Date())
                     .sign(Algorithm.HMAC256(sifreAnahtari));
             return Optional.of(token);

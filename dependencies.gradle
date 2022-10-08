@@ -19,6 +19,7 @@ ext {
             springBootActuator                     : "org.springframework.boot:spring-boot-starter-actuator:$versions.springBoot",
             springValidation                       : "org.springframework.boot:spring-boot-starter-validation:$versions.springBoot",
             springBootThymeleaf                    : "org.springframework.boot:spring-boot-starter-thymeleaf:$versions.springBoot",
+            springBootDataRedis                    : "org.springframework.boot:spring-boot-starter-data-redis:$versions.springBoot",
             springBootDevtools                     : "org.springframework.boot:spring-boot-devtools:$versions.springBoot",
             springOpenFeign                        : "org.springframework.cloud:spring-cloud-starter-openfeign:$versions.springCloud",
             springCloudConfigServer                : "org.springframework.cloud:spring-cloud-config-server:$versions.springCloud",

@@ -7,6 +7,7 @@ import com.muhammet.service.AuthService;
 import com.muhammet.config.security.JwtTokenManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,6 +25,7 @@ public class AuthController {
 
     // http://localhost:9999/v1/api/auth/test
     @GetMapping("/test")
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     public String getTestString(){
         return "Auth test";
     }
