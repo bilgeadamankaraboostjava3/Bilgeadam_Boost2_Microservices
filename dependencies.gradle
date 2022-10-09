@@ -8,7 +8,7 @@ ext {
             mapstruct                : "1.5.2.Final",
             openApi                  : "1.6.11",
             auth0                    : "4.0.0",
-
+            graphql                  : "11.1.0",
     ]
 
     libs = [
@@ -36,5 +36,11 @@ ext {
             lombokMapstructBinding                 : "org.projectlombok:lombok-mapstruct-binding:0.2.0",
             openApi                                : "org.springdoc:springdoc-openapi-ui:$versions.openApi",
             javaJWT                                : "com.auth0:java-jwt:$versions.auth0",
+            GraphqlJavaTools                       : "com.graphql-java-kickstart:graphql-java-tools:$versions.graphql",
+            GraphqlSpringBootStarter               : "com.graphql-java-kickstart:graphql-spring-boot-starter:$versions.graphql",
+            GraphiqlSpringBootStarter              : "com.graphql-java-kickstart:graphiql-spring-boot-starter:$versions.graphql",
+
+
+
     ]
 }

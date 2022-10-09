@@ -36,8 +36,10 @@ public class UserProfileController {
     @GetMapping(FINDALL)
     public ResponseEntity<Iterable<UserProfile>> findAll(){
         Long start = System.currentTimeMillis();
+        System.out.println("Start Time : "+start);
         Iterable<UserProfile> lists = userProfileService.findAll();
         Long end = System.currentTimeMillis();
+        System.out.println("End Time : "+end);
         System.out.println("Time Elastic....: "+(end-start));
         return ResponseEntity.ok(lists);
     }

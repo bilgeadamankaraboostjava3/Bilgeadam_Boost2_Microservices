@@ -90,8 +90,10 @@ public class UserProfileController {
     @GetMapping("/findAllData")
     public ResponseEntity<List<UserProfile>> findAll(){
         Long start = System.currentTimeMillis();
+        System.out.println("Start Time : "+start);
         List<UserProfile> lists = userProfileService.findAll();
         Long end = System.currentTimeMillis();
+        System.out.println("End Time : "+end);
         System.out.println("Time UserService....: "+(end-start));
         return ResponseEntity.ok(lists);
     }

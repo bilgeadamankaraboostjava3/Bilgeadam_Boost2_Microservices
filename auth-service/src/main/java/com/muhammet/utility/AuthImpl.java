@@ -14,7 +14,7 @@ public class AuthImpl {
 
     private final AuthService authService;
 
-    @PostConstruct
+  //  @PostConstruct
     public void init(){
         for(int i=0; i<20_000;i++){
             authService.register(RegisterRequestDto.builder()
