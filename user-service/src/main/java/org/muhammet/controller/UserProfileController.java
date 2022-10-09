@@ -86,6 +86,18 @@ public class UserProfileController {
         }
     }
 
+
+    @GetMapping("/findAllData")
+    public ResponseEntity<List<UserProfile>> findAll(){
+        Long start = System.currentTimeMillis();
+        List<UserProfile> lists = userProfileService.findAll();
+        Long end = System.currentTimeMillis();
+        System.out.println("Time UserService....: "+(end-start));
+        return ResponseEntity.ok(lists);
+    }
+
+
+
     @GetMapping("/getall")
     public List<UserProfile> getAll(){
        log.info("Tüm Kullanıcılar getirildi..........");

@@ -1,0 +1,11 @@
+server:
+  port: 9099
+
+spring:
+  elasticsearch:
+    uris: http://localhost:9200
+raceapplication:
+  url:
+    auth: http://localhost:9090/
+    main: http://localhost:9091/
+    user: http://localhost:9092/
