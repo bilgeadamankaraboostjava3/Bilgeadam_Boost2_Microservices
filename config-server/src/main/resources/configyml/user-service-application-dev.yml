@@ -11,6 +11,11 @@ logging:
     max-size: 1MB
 
 spring:
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+    service:
+      name: user-service
   redis:
     host: localhost
     port: 6379
