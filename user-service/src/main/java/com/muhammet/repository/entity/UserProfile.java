@@ -4,20 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-@Table(name="tbluserprofile")
-@Entity
+@Document
 public class UserProfile implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    String id;
     Long authid;
     String username;
     String name;
@@ -25,9 +24,7 @@ public class UserProfile implements Serializable {
     String email;
     String phone;
     String photo;
-    @Column(length = 1000)
     String address;
-    @Column(length = 5000)
     String about;
     Long created;
     Long updated;

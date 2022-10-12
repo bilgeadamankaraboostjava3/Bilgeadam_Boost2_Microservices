@@ -14,7 +14,12 @@ ext {
     libs = [
             springBoot                             : "org.springframework.boot:spring-boot-starter:$versions.springBoot",
             springBootWeb                          : "org.springframework.boot:spring-boot-starter-web:$versions.springBoot",
+
             springBootJpa                          : "org.springframework.boot:spring-boot-starter-data-jpa:$versions.springBoot",
+            springBootDataRedis                    : "org.springframework.boot:spring-boot-starter-data-redis:$versions.springBoot",
+            springBootDataElasticSearch            : "org.springframework.boot:spring-boot-starter-data-elasticsearch:$versions.springBoot",
+            springBootDataMongoDB                  : "org.springframework.boot:spring-boot-starter-data-mongodb:$versions.springBoot",
+
             springBootSecurity                     : "org.springframework.boot:spring-boot-starter-security:$versions.springBoot",
             springBootActuator                     : "org.springframework.boot:spring-boot-starter-actuator:$versions.springBoot",
 
@@ -22,8 +27,7 @@ ext {
 
             springValidation                       : "org.springframework.boot:spring-boot-starter-validation:$versions.springBoot",
             springBootThymeleaf                    : "org.springframework.boot:spring-boot-starter-thymeleaf:$versions.springBoot",
-            springBootDataRedis                    : "org.springframework.boot:spring-boot-starter-data-redis:$versions.springBoot",
-            springBootDataElasticSearch            : "org.springframework.boot:spring-boot-starter-data-elasticsearch:$versions.springBoot",
+
             springBootDevtools                     : "org.springframework.boot:spring-boot-devtools:$versions.springBoot",
             springOpenFeign                        : "org.springframework.cloud:spring-cloud-starter-openfeign:$versions.springCloud",
             springCloudConfigServer                : "org.springframework.cloud:spring-cloud-config-server:$versions.springCloud",

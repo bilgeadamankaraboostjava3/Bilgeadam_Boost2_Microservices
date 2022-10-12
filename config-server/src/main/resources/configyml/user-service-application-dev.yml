@@ -3,9 +3,8 @@ server:
 
 logging:
   level:
-    root: WARN
-    org.muhammet: DEBUG
-    org.springframework: INFO
+    com.muhammet: DEBUG
+    org.springframework: DEBUG
   file:
     name: user-service-application.log
     max-size: 1MB
@@ -24,16 +23,13 @@ spring:
   redis:
     host: localhost
     port: 6379
-
-  datasource:
-    url: 'jdbc:postgresql://localhost:5432/YarismaDB'
-    username: 'postgres'
-    password: 'root'
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+  data:
+    mongodb:
+      host: 34.70.190.164
+      port: 19589
+      database: bilgeyarisma
+      username: bilgeadamuser
+      password: "C[?K-6)pDZe]ju`-ROi%|or8C!G1ll"
 
 raceapplication:
   url:
