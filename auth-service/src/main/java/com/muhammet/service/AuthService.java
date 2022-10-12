@@ -3,6 +3,8 @@ import com.muhammet.dto.request.DoLoginRequestDto;
 import com.muhammet.dto.request.NewUserCreateDto;
 import com.muhammet.dto.request.RegisterRequestDto;
 import com.muhammet.manager.IUserManager;
+import com.muhammet.rabbitmq.model.CreateUser;
+import com.muhammet.rabbitmq.producer.CreateUserProducer;
 import com.muhammet.repository.IAuthRepository;
 import com.muhammet.repository.entity.Auth;
 import com.muhammet.repository.enums.Roles;
@@ -16,10 +18,12 @@ import java.util.Optional;
 public class AuthService extends ServiceManager<Auth,Long> {
     private final IAuthRepository authRepository;
     private final IUserManager userManager;
-    public AuthService(IAuthRepository authRepository, IUserManager userManager) {
+    private final CreateUserProducer createUserProducer;
+    public AuthService(IAuthRepository authRepository, IUserManager userManager, CreateUserProducer createUserProducer) {
         super(authRepository);
         this.authRepository = authRepository;
         this.userManager = userManager;
+        this.createUserProducer = createUserProducer;
     }
     public Optional<Auth> dologin(DoLoginRequestDto dto){
         return authRepository.findOptionalByUsernameIgnoreCaseAndPassword(dto.getUsername(),
@@ -39,6 +43,8 @@ public class AuthService extends ServiceManager<Auth,Long> {
                     auth.setRole(Roles.USER);
 
         save(auth);
+        /*
+        User Service e kulanıcının profilin oluşması için istek gönderir.
         userManager.NewUserCreate(
                 NewUserCreateDto.builder()
                         .authid(auth.getId())
@@ -46,6 +52,14 @@ public class AuthService extends ServiceManager<Auth,Long> {
                         .username(dto.getUsername())
                         .build()
         );
+
+         */
+        createUserProducer.sendCreateUserMessage(CreateUser.builder()
+                        .authid(auth.getId())
+                        .email(dto.getEmail())
+                        .username(dto.getUsername())
+                        .password(dto.getPassword())
+                .build());
        return auth;
     }
 

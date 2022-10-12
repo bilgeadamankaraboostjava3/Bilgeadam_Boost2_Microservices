@@ -11,6 +11,11 @@ logging:
     max-size: 1MB
 
 spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: muhammet
+    password: Aa123456*
   zipkin:
     base-url: http://localhost:9411
     enabled: true
