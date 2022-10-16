@@ -1,5 +1,6 @@
 package com.muhammet.config.redis;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +13,10 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 @EnableRedisRepositories // Spring - Redis için repository'leri aktif etmek için kullanılır.
 public class RedisConfiguration {
 
+    @Value("${spring.redis.host}")
+    String host;
     @Bean
     public LettuceConnectionFactory redisConnectionFactory() {
-        return new LettuceConnectionFactory(new RedisStandaloneConfiguration("localhost", 6379));
+        return new LettuceConnectionFactory(new RedisStandaloneConfiguration(host, 6379));
     }
 }

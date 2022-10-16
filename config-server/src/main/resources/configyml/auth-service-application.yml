@@ -1,16 +1,24 @@
 server:
-  port: ${SERVERPORT}
+  port: ${auth_port}
 
 spring:
+  rabbitmq:
+    host: ${rabbitmq_host}
+    port: ${rabbitmq_port}
+    username: ${rabbitmq_username}
+    password: ${rabbitmq_password}
   zipkin:
-    base-url: http://localhost:9411
+    base-url: ${zipkin_url}
     enabled: true
     service:
       name: auth-service
+  security:
+    user:
+      name: B!lgeAdamKu!!anicisi
   datasource:
-    url: ${DBURL}
-    username: ${DBUSERNAME}
-    password: ${DBPASSWORD}
+    url: ${db_postgresql_url}
+    username: ${db_postgresql_username}
+    password: ${db_postgresql_password}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -19,6 +27,6 @@ spring:
 
 raceapplication:
   url:
-    auth: ${AUTHURL}
-    main: ${MAINURL}
-    user: ${USERURL}
+    auth: ${auth_url}
+    main: ${main_url}
+    user: ${user_url}

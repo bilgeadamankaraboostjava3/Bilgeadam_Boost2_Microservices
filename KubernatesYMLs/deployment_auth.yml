@@ -27,43 +27,73 @@ spec:
           ports:
             - containerPort: 9090      
           env:
-            - name:  SERVERPORT
+            - name:  auth_port
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
                   key: auth_port
-            - name: DBUSERNAME
+            - name:  zipkin_url
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
-                  key: db_username
-            - name: DBPASSWORD
+                  key: zipkin_url
+            - name: db_postgresql_username
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
-                  key: db_password
-            - name: DBURL
+                  key: db_postgresql_username
+            - name: db_postgresql_password
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
-                  key: db_url
-            - name: AUTHURL
+                  key: db_postgresql_password
+            - name: db_postgresql_url
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: db_postgresql_url
+            - name: auth_url
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
                   key: auth_url
-            - name: MAINURL
+            - name: main_url
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
                   key: main_url
-            - name: USERURL
+            - name: user_url
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
                   key: user_url
-            - name: CONFIGSERVER
+            - name: config_server_url
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
                   key: config_server_url
+
+            - name: rabbitmq_host
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: rabbitmq_host
+
+            - name: rabbitmq_port
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: rabbitmq_port
+
+            - name: rabbitmq_username
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: rabbitmq_username
+
+            - name: rabbitmq_password
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: rabbitmq_password
+

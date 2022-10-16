@@ -25,5 +25,4 @@ spec:
             value: "AdminBilgeadam"
           - name: MONGO_INITDB_ROOT_PASSWORD
             value: "C[?K-6)pDZe]ju`-ROi%|or8C!G1ll"
-        
-   
+## bilgeyarisma   

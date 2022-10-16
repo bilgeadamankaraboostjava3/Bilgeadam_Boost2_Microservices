@@ -1,0 +1,17 @@
+server:
+  port: ${elastic_port}
+
+spring:
+  zipkin:
+    base-url: ${zipkin_url}
+    enabled: true
+    service:
+      name: elastic-service
+  elasticsearch:
+    uris: ${elastic_search_url}
+
+raceapplication:
+  url:
+    auth: ${auth_url}
+    main: ${main_url}
+    user: ${user_url}

@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mainployment
+  name: odevelasticsearch
   labels:
-    team: tarismadevelopersteam
+    team: sosyalmedyadevelopersteam
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: main-service    
+      elasticpod: pod-elasticsearch
   template:
     metadata:
       labels:
-        app: main-service
+        elasticpod: pod-elasticsearch
     spec:
-      containers:        
-        - image: muhammedali55/yarismauygulamasimain:v001
-          name:  podmain
+      containers:
+        - image: elasticsearch:7.17.6
+          name:  pod-elasticsearch
           resources:
             requests:
               memory: "1Gi"
@@ -25,45 +25,54 @@ spec:
               memory: "2Gi"
               cpu: "0.25"
           ports:
-            - containerPort: 9091      
+            - name:  elasticone
+              containerPort: 9200
+            - name:  elastictwo
+              containerPort: 9300
           env:
-            - name:  SERVERPORT
-              valueFrom:
-                secretKeyRef:
-                  name: yarismasecret
-                  key: main_port
-            - name: DBUSERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: yarismasecret
-                  key: db_username
-            - name: DBPASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: yarismasecret
-                  key: db_password
-            - name: DBURL
-              valueFrom:
-                secretKeyRef:
-                  name: yarismasecret
-                  key: db_url
-            - name: AUTHURL
-              valueFrom:
-                secretKeyRef:
-                  name: yarismasecret
-                  key: auth_url
-            - name: MAINURL
-              valueFrom:
-                secretKeyRef:
-                  name: yarismasecret
-                  key: main_url
-            - name: USERURL
-              valueFrom:
-                secretKeyRef:
-                  name: yarismasecret
-                  key: user_url
+            - name: discovery.type
+              value: single-node
+            - name: bootstrap.memory_lock
+              value: "true"
+            - name: "ES_JAVA_OPTS"
+              value: "-Xms1024m -Xmx1024m"
             - name: config_server_url
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
                   key: config_server_url
+            - name: elastic_port
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: elastic_port
+            - name: zipkin_url
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: zipkin_url
+            - name: elastic_search_url
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: elastic_search_url
+
+            - name: auth_url
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: auth_url
+            - name: main_url
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: main_url
+            - name: user_url
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: user_url
+
+
+
+

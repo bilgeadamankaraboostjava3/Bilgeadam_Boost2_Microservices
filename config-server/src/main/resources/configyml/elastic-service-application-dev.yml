@@ -1,0 +1,17 @@
+server:
+  port: 9099
+
+spring:
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+    service:
+      name: elastic-service
+  elasticsearch:
+    uris: http://34.69.208.110:9200
+
+raceapplication:
+  url:
+    auth: http://localhost:9090/
+    main: http://localhost:9091/
+    user: http://localhost:9092/

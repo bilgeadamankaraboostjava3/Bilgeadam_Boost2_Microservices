@@ -17,7 +17,7 @@ public class GetAllData {
     private final UserProfileService userProfileService;
     private final IUserManager userManager;
 
-    @PostConstruct
+   // @PostConstruct
     public void init(){
         List<UserProfile> lists = userManager.findAll().getBody().subList(1,400);
         userProfileService.saveAll(lists);

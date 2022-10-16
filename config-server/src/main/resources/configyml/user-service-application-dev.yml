@@ -21,7 +21,7 @@ spring:
     service:
       name: user-service
   redis:
-    host: localhost
+    host: 34.69.208.110
     port: 6379
   data:
     mongodb:

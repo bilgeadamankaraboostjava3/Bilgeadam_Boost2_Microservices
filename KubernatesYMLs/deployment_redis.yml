@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: odevredis
+  labels:
+    team: sosyalmedyadevelopersteam
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      redis: pod-redis
+  template:
+    metadata:
+      labels:
+        redis: pod-redis
+    spec:
+      containers:
+        - image: redis
+          name:  pod-redis
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "0.1"
+            limits:
+              memory: "2Gi"
+              cpu: "0.25"
+          ports:
+            - containerPort: 6379
