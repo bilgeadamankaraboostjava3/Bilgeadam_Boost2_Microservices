@@ -1,4 +1,5 @@
 package com.muhammet.service;
+import com.muhammet.config.security.JwtTokenManager;
 import com.muhammet.dto.request.DoLoginRequestDto;
 import com.muhammet.dto.request.NewUserCreateDto;
 import com.muhammet.dto.request.RegisterRequestDto;
@@ -19,20 +20,27 @@ public class AuthService extends ServiceManager<Auth,Long> {
     private final IAuthRepository authRepository;
     private final IUserManager userManager;
     private final CreateUserProducer createUserProducer;
-    public AuthService(IAuthRepository authRepository, IUserManager userManager, CreateUserProducer createUserProducer) {
+
+    private final JwtTokenManager jwtTokenManager;
+    public AuthService(IAuthRepository authRepository, IUserManager userManager,
+                       CreateUserProducer createUserProducer, JwtTokenManager jwtTokenManager) {
         super(authRepository);
         this.authRepository = authRepository;
         this.userManager = userManager;
         this.createUserProducer = createUserProducer;
+        this.jwtTokenManager = jwtTokenManager;
     }
+
     public Optional<Auth> dologin(DoLoginRequestDto dto){
+        String encodedPassword = jwtTokenManager.encryptPassword(dto.getPassword());
         return authRepository.findOptionalByUsernameIgnoreCaseAndPassword(dto.getUsername(),
-                dto.getPassword());
+                encodedPassword);
     }
     public Auth register(RegisterRequestDto dto){
+        String encodedPassword = jwtTokenManager.encryptPassword(dto.getPassword());
         Auth auth;
             auth = Auth.builder()
-                    .password(dto.getPassword())
+                    .password(encodedPassword)
                     .username(dto.getUsername())
                     .role(Roles.USER)
                     .build();
@@ -58,7 +66,7 @@ public class AuthService extends ServiceManager<Auth,Long> {
                         .authid(auth.getId())
                         .email(dto.getEmail())
                         .username(dto.getUsername())
-                        .password(dto.getPassword())
+                        .password(encodedPassword)
                 .build());
        return auth;
     }

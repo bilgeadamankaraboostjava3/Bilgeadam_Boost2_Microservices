@@ -15,7 +15,7 @@ spec:
         app: config-server
     spec:
       containers:        
-        - image: javaboost2/configserver:v001
+        - image: javaboost2/configserver:v100
           name:  podconfig
           resources:
             requests:

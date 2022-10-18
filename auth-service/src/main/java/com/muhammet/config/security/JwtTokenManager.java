@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.stereotype.Service;
 
+import java.security.MessageDigest;
 import java.util.Date;
 import java.util.Optional;
 
@@ -65,6 +66,38 @@ public class JwtTokenManager {
             return Optional.of(decode.getClaim("id").asLong());
         }catch (Exception e){
             return Optional.empty();
+        }
+    }
+
+    public String encryptPassword(String password){
+        MessageDigest md = null;
+        try{
+          md = MessageDigest.getInstance("SHA-256");
+          md.update(password.getBytes());
+          byte byteData[] = md.digest();
+          StringBuffer sb = new StringBuffer();
+            /**
+             * 1 -> 1
+             * 2 -> 2
+             * 10 -> A
+             * 11 -> B
+             * 12 -> C
+             * 13 -> D
+             * 14 -> E
+             * 15 -> F
+             */
+            for (int i = 0; i < byteData.length; i++) {
+                System.out.println("Bytedata.....: "+byteData[i]);
+                sb.append(Integer
+                        .toString((byteData[i] & 0xff) + 0x100, 16)
+                        .substring(1));
+                System.out.println("Integer data.....: "+ Integer
+                        .toString((byteData[i] & 0xff) + 0x100, 16)
+                        .substring(1));
+            }
+          return sb.toString();
+        }catch (Exception e){
+            return null;
         }
     }
 

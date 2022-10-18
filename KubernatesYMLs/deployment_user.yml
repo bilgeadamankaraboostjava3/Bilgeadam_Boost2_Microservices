@@ -15,7 +15,7 @@ spec:
         app: user-service
     spec:
       containers:        
-        - image: muhammedali55/yarismauygulamasiuser:v001
+        - image: javaboost2/userservice:v101
           name:  poduser
           resources:
             requests:
@@ -27,41 +27,91 @@ spec:
           ports:
             - containerPort: 9092      
           env:
-            - name:  SERVERPORT
+            - name:  user_port
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
                   key: user_port
-            - name: DBUSERNAME
+
+            - name:  rabbitmq_host
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
-                  key: db_username
-            - name: DBPASSWORD
+                  key: rabbitmq_host
+            - name:  rabbitmq_port
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
-                  key: db_password
-            - name: DBURL
+                  key: rabbitmq_port
+            - name:  rabbitmq_username
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
-                  key: db_url
-            - name: AUTHURL
+                  key: rabbitmq_username
+            - name:  rabbitmq_password
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: rabbitmq_password
+            - name:  zipkin_url
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: zipkin_url
+
+            - name:  redis_host
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: redis_host
+            - name:  redis_port
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: redis_port
+
+            - name: auth_url
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
                   key: auth_url
-            - name: MAINURL
+            - name: main_url
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
                   key: main_url
-            - name: USERURL
+            - name: user_url
               valueFrom:
                 secretKeyRef:
                   name: yarismasecret
                   key: user_url
+
+            - name: db_mongo_url
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: db_mongo_url
+            - name: db_mongo_username
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: db_mongo_username
+            - name: db_mongo_password
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: db_mongo_password
+            - name: db_mongo_port
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: db_mongo_port
+            - name: db_mongo_database
+              valueFrom:
+                secretKeyRef:
+                  name: yarismasecret
+                  key: db_mongo_database
+
             - name: config_server_url
               valueFrom:
                 secretKeyRef:
