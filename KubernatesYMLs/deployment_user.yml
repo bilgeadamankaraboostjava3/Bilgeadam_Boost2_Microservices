@@ -15,7 +15,7 @@ spec:
         app: user-service
     spec:
       containers:        
-        - image: javaboost2/userservice:v101
+        - image: javaboost2/userservice:v103
           name:  poduser
           resources:
             requests:

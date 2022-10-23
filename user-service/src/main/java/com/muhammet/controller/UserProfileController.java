@@ -26,11 +26,12 @@ import static com.muhammet.constants.ApiUrls.*;
 @RequestMapping(BASE_URL + USER)
 @RequiredArgsConstructor
 @Slf4j
+
 public class UserProfileController {
     private final UserProfileService userProfileService;
     private final JwtTokenManager jwtTokenManager;
 
-
+    @CrossOrigin(originPatterns = "*")
     @PostMapping(NEW_CREATE_USER)
     public ResponseEntity<Boolean> NewUserCreate(@RequestBody @Valid NewUserCreateDto dto){
         try{
@@ -40,7 +41,7 @@ public class UserProfileController {
             throw new UserManagerException(ErrorType.USER_DONT_CREATE);
         }
     }
-
+    @CrossOrigin(originPatterns = "*")
     @PostMapping(UPDATE_PROFILE)
     public ResponseEntity<Boolean> updateProfile(@RequestBody @Valid EditProfileRequestDto dto){
 
@@ -55,17 +56,17 @@ public class UserProfileController {
 
 
     }
-
+    @CrossOrigin(originPatterns = "*")
     @GetMapping(FINDALL)
     public ResponseEntity<Page<UserProfile>> findAll(int currentPage, int pageSize, String sortParameter, String direction){
         return ResponseEntity.ok(userProfileService.findAllPage(currentPage,pageSize, sortParameter, direction));
     }
-
+    @CrossOrigin(originPatterns = "*")
     @GetMapping(FINDALL_SLICE)
     public ResponseEntity<Slice<UserProfile>> findAllSlice(int currentPage, int pageSize, String sortParameter, String direction){
         return ResponseEntity.ok(userProfileService.findAllSlice(currentPage,pageSize, sortParameter, direction));
     }
-
+    @CrossOrigin(originPatterns = "*")
     @GetMapping("/findallcriteria/{page}/{size}/{sortparameter}/{direction}")
     public ResponseEntity<Slice<UserProfile>> findAllCriteria(@PathVariable int page,
                                                               @PathVariable int size,
@@ -73,7 +74,7 @@ public class UserProfileController {
                                                               @PathVariable String direction){
         return ResponseEntity.ok(userProfileService.findAllSlice(page,size, sortparameter, direction));
     }
-
+    @CrossOrigin(originPatterns = "*")
     @GetMapping("/redis")
     @Cacheable(value = "hello_redis")
     public String helloRedis(String message){
@@ -86,7 +87,7 @@ public class UserProfileController {
         }
     }
 
-
+    @CrossOrigin(originPatterns = "*")
     @GetMapping("/findAllData")
     public ResponseEntity<List<UserProfile>> findAll(){
         Long start = System.currentTimeMillis();
@@ -99,13 +100,13 @@ public class UserProfileController {
     }
 
 
-
+    @CrossOrigin(originPatterns = "*")
     @GetMapping("/getall")
     public List<UserProfile> getAll(){
        log.info("Tüm Kullanıcılar getirildi..........");
         return userProfileService.getAllCache();
     }
-
+    @CrossOrigin(originPatterns = "*")
     @GetMapping("/clearcache")
     public void ClearCache(String key,String parameter){
         userProfileService.clearCache(key,parameter);

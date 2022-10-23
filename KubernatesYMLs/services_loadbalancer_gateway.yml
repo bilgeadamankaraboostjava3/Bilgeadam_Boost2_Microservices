@@ -4,14 +4,12 @@ metadata:
   name: loadbalancer-gateway
 spec:
   selector:
-    app: rabbitmq
+    app: user-service
   type: LoadBalancer
   ports:
     - name: test
-      port: 5672
-      targetPort: 5672
-    - name: test2
-      port: 15672
-      targetPort: 15672
+      port: 9092
+      targetPort: 9092
+
 
 
