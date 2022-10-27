@@ -1,6 +1,7 @@
 package com.muhammet.controller;
 
 import com.muhammet.dto.request.NewUserCreateDto;
+import com.muhammet.dto.request.OnlineResponseDto;
 import com.muhammet.repository.entity.UserProfile;
 import com.muhammet.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,23 @@ import static com.muhammet.constants.ApiUrls.*;
 public class UserProfileController {
     private final UserProfileService userProfileService;
     private final JwtTokenManager jwtTokenManager;
+
+    @GetMapping("/setdata")
+    public void setData(){
+        userProfileService.setData();
+    }
+
+    @CrossOrigin(originPatterns = "*")
+    @PostMapping(ONLINE)
+    public ResponseEntity<UserProfile> doOnline(@RequestBody OnlineResponseDto dto){
+        try{
+            Optional<Long> authid  =jwtTokenManager.getUserId(dto.getToken());
+            if(authid.isEmpty())  throw new UserManagerException(ErrorType.INVALID_TOKEN);
+            return ResponseEntity.ok(userProfileService.online(authid.get()));
+        }catch (Exception exception){
+            throw new UserManagerException(ErrorType.INVALID_TOKEN);
+        }
+    }
 
     @CrossOrigin(originPatterns = "*")
     @PostMapping(NEW_CREATE_USER)

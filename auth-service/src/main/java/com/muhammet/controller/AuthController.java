@@ -2,6 +2,8 @@ package com.muhammet.controller;
 
 import com.muhammet.dto.request.DoLoginRequestDto;
 import com.muhammet.dto.request.RegisterRequestDto;
+import com.muhammet.dto.response.DoLoginResponseDto;
+import com.muhammet.dto.response.RegisterResponseDto;
 import com.muhammet.repository.entity.Auth;
 import com.muhammet.service.AuthService;
 import com.muhammet.config.security.JwtTokenManager;
@@ -30,19 +32,53 @@ public class AuthController {
         return "Auth test";
     }
 
+    @CrossOrigin(originPatterns = "*")
     @PostMapping(LOGIN)
-    public ResponseEntity<String> doLogin(@RequestBody @Valid DoLoginRequestDto dto){
+    public ResponseEntity<DoLoginResponseDto> doLogin(@RequestBody @Valid DoLoginRequestDto dto){
         Optional<Auth> auth = authService.dologin(dto);
        if(auth.isPresent()){
            String token = jwtTokenManager.createToken(auth.get().getId()).get();
-           return ResponseEntity.ok(token);
+           return ResponseEntity.ok(DoLoginResponseDto
+                   .builder()
+                           .token(token)
+                           .message("Login successful")
+                            .responsecode(200L)
+                   .build()
+           );
        }
-       return ResponseEntity.badRequest().body("Giriş Başarısız");
+       return ResponseEntity.ok(DoLoginResponseDto
+               .builder()
+               .message("Login failed")
+               .responsecode(400L)
+               .build()
+       );
     }
+    @CrossOrigin(originPatterns = "*")
     @PostMapping(REGISTER)
-    public ResponseEntity<Void> register(@RequestBody @Valid RegisterRequestDto dto){
-        authService.register(dto);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<RegisterResponseDto> register(@RequestBody @Valid RegisterRequestDto dto){
+        try{
+          Auth auth =  authService.register(dto);
+          if(auth.getId()==null)
+                return ResponseEntity.ok(RegisterResponseDto
+                        .builder()
+                        .message("Register failed")
+                        .responsecode(400L)
+                        .build()
+                );
+            return ResponseEntity.ok(RegisterResponseDto
+                    .builder()
+                    .message("Register successful")
+                    .responsecode(200L)
+                    .build());
+        }catch (Exception e){
+            return ResponseEntity.ok(RegisterResponseDto
+                    .builder()
+                    .message("Register failed")
+                    .responsecode(401L)
+                    .build()
+            );
+        }
+
     }
 
 }
