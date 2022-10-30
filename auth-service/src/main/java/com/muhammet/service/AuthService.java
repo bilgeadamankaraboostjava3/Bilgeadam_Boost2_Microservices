@@ -3,6 +3,8 @@ import com.muhammet.config.security.JwtTokenManager;
 import com.muhammet.dto.request.DoLoginRequestDto;
 import com.muhammet.dto.request.NewUserCreateDto;
 import com.muhammet.dto.request.RegisterRequestDto;
+import com.muhammet.exception.AuthManagerException;
+import com.muhammet.exception.ErrorType;
 import com.muhammet.manager.IUserManager;
 import com.muhammet.rabbitmq.model.CreateUser;
 import com.muhammet.rabbitmq.producer.CreateUserProducer;
@@ -38,6 +40,8 @@ public class AuthService extends ServiceManager<Auth,Long> {
     }
     public Auth register(RegisterRequestDto dto){
         String encodedPassword = jwtTokenManager.encryptPassword(dto.getPassword());
+        Boolean isExist = authRepository.isExistsUserName(dto.getUsername());
+        if(isExist) throw new AuthManagerException(ErrorType.LOGIN_ERROR_USERNAME_DUPLICATE);
         Auth auth;
             auth = Auth.builder()
                     .password(encodedPassword)

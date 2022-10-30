@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.muhammet.constants.ApiUrls.*;
@@ -79,6 +80,11 @@ public class AuthController {
             );
         }
 
+    }
+
+    @GetMapping("/getall")
+    public ResponseEntity<List<Auth>> findAll(){
+        return ResponseEntity.ok(authService.findAll());
     }
 
 }

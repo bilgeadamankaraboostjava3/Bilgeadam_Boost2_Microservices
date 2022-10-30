@@ -32,4 +32,16 @@ public class OnlineController {
         return ResponseEntity.ok(onlineService.findAllByOffline());
     }
 
+    @GetMapping(FINDALL)
+    @CrossOrigin(originPatterns = "*")
+    public ResponseEntity<List<Online>> findAll(){
+        return ResponseEntity.ok(onlineService.findAll());
+    }
+
+
+    @GetMapping("/remove")
+    public void remove(){
+        onlineService.remove();
+    }
+
 }

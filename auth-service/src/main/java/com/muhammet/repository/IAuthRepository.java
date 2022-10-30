@@ -18,4 +18,6 @@ public interface IAuthRepository extends JpaRepository<Auth,Long> {
     @Query("select COUNT(a)>0 from Auth a where  UPPER(a.username) =  UPPER(?1) and a.password = ?2")
     Boolean isExists(String username,String password);
 
+    @Query("select COUNT(a)>0 from Auth a where  UPPER(a.username) =  UPPER(?1)")
+    Boolean isExistsUserName(String username);
 }

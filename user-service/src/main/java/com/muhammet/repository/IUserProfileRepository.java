@@ -15,6 +15,5 @@ public interface IUserProfileRepository extends MongoRepository<UserProfile,Stri
     @Query("select COUNT(a)>0 from UserProfile a where  a.authid = ?1")
     Boolean isExists(Long authid);
 
-    List<UserProfile> findOptionalByAuthid(Long authid);
-
+    UserProfile findByAuthid(Long authid);
 }

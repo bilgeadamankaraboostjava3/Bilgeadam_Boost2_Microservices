@@ -50,6 +50,18 @@ public class UserProfileController {
     }
 
     @CrossOrigin(originPatterns = "*")
+    @PostMapping(OFFLINE)
+    public ResponseEntity<UserProfile> doOffline(@RequestBody OnlineResponseDto dto){
+        try{
+            Optional<Long> authid  =jwtTokenManager.getUserId(dto.getToken());
+            if(authid.isEmpty())  throw new UserManagerException(ErrorType.INVALID_TOKEN);
+            return ResponseEntity.ok(userProfileService.offline(authid.get()));
+        }catch (Exception exception){
+            throw new UserManagerException(ErrorType.INVALID_TOKEN);
+        }
+    }
+
+    @CrossOrigin(originPatterns = "*")
     @PostMapping(NEW_CREATE_USER)
     public ResponseEntity<Boolean> NewUserCreate(@RequestBody @Valid NewUserCreateDto dto){
         try{

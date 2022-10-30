@@ -23,4 +23,13 @@ public class OnlineService extends ServiceManager<Online,String> {
         return repository.findAllByIsonline(false);
     }
 
+    public List<Online> findAll(){
+        return repository.findAll();
+    }
+
+
+    public void remove(){
+        repository.deleteAll();
+    }
+
 }

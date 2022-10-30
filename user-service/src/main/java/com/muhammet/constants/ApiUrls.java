@@ -16,6 +16,7 @@ public class ApiUrls {
     public static final String FINDALL = "/findall";
     public static final String FINDALL_SLICE = "/findallslice";
     public static final String ONLINE = "/online";
+    public static final String OFFLINE = "/offline";
     public static final String FINDALL_ONLINE = "/findallonline";
     public static final String FINDALL_OFFLINE = "/findalloffline";
 

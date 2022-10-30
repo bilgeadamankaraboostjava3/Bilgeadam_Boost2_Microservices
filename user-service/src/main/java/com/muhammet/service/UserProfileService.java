@@ -39,43 +39,46 @@ public class UserProfileService extends ServiceManager<UserProfile,String> {
         });
     }
 
+    public UserProfile findByAuthId(Long authId){
+        return repository.findByAuthid(authId);
+    }
     public UserProfile online(Long authid){
-        List<UserProfile> profile = repository.findOptionalByAuthid(authid);
-        if(profile.isEmpty()) throw new UserManagerException(ErrorType.USER_NOT_FOUND);
-        Optional<Online> online = onlineRepository.findOptionalByUserid(profile.get(0).getId());
+        UserProfile profile = repository.findByAuthid(authid);
+        if(profile==null) throw new UserManagerException(ErrorType.USER_NOT_FOUND);
+        Optional<Online> online = onlineRepository.findOptionalByUserid(profile.getId());
         if(online.isEmpty()){
             onlineRepository.save(Online.builder()
-                            .name(profile.get(0).getName())
-                            .photo(profile.get(0).getPhoto())
-                            .surname(profile.get(0).getSurname())
-                            .userid(profile.get(0).getId())
-                            .username(profile.get(0).getUsername())
+                            .name(profile.getName())
+                            .photo(profile.getPhoto())
+                            .surname(profile.getSurname())
+                            .userid(profile.getId())
+                            .username(profile.getUsername())
                             .isonline(true)
                     .build());
         }else{
             online.get().setIsonline(true);
             onlineRepository.save(online.get());
         }
-        return profile.get(0);
+        return profile;
     }
     public UserProfile offline(Long authid){
-        List<UserProfile> profile = repository.findOptionalByAuthid(authid);
-        if(profile.isEmpty()) throw new UserManagerException(ErrorType.USER_NOT_FOUND);
-        Optional<Online> online = onlineRepository.findOptionalByUserid(profile.get(0).getId());
+        UserProfile profile = repository.findByAuthid(authid);
+        if(profile==null) throw new UserManagerException(ErrorType.USER_NOT_FOUND);
+        Optional<Online> online = onlineRepository.findOptionalByUserid(profile.getId());
         if(online.isEmpty()){
             onlineRepository.save(Online.builder()
-                    .name(profile.get(0).getName())
-                    .photo(profile.get(0).getPhoto())
-                    .surname(profile.get(0).getSurname())
-                    .username(profile.get(0).getUsername())
-                    .userid(profile.get(0).getId())
+                    .name(profile.getName())
+                    .photo(profile.getPhoto())
+                    .surname(profile.getSurname())
+                    .username(profile.getUsername())
+                    .userid(profile.getId())
                     .isonline(false)
                     .build());
         }else{
             online.get().setIsonline(false);
             onlineRepository.save(online.get());
         }
-        return profile.get(0);
+        return profile;
     }
 
     public UserProfile createUserProfile(NewUserCreateDto dto){
@@ -88,10 +91,10 @@ public class UserProfileService extends ServiceManager<UserProfile,String> {
 
     public Boolean updateUserProfile(EditProfileRequestDto dto, Long authid){
         UserProfile userProfile = IUserProfileMapper.INSTANCE.toUserProfile(dto);
-        List<UserProfile> optionalUserProfile = repository.findOptionalByAuthid(authid);
-        if(optionalUserProfile.isEmpty()) return false;
+        UserProfile optionalUserProfile = repository.findByAuthid(authid);
+        if(optionalUserProfile==null) return false;
         try{
-            userProfile.setId(optionalUserProfile.get(0).getId());
+            userProfile.setId(optionalUserProfile.getId());
             update(userProfile);
             return true;
         }catch (Exception e){
