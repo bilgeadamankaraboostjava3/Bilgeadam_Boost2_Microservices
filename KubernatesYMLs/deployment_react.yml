@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reactployment
+  labels:
+    team: tarismadevelopersteam
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-service
+  template:
+    metadata:
+      labels:
+        app: react-service
+    spec:
+      containers:        
+        - image: javaboost2/react:v004
+          name:  podreact
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "0.1"
+            limits:
+              memory: "2Gi"
+              cpu: "0.25"
+          ports:
+            - containerPort: 80
+            - containerPort: 3000
